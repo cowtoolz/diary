@@ -1,0 +1,104 @@
+.TH DIARY 1 "April 2026" "diary 1.0" "User Commands"
+.SH NAME
+diary \- simple personal journal manager
+.SH SYNOPSIS
+.B diary
+.PP
+(This program takes no positional arguments)
+.SH INSTALLATION
+Installation and uninstallation can be performed with
+.BR make .
+.PP
+.RS
+.nf
+$ git clone https://github.com/cowtoolz/diary && cd diary
+# make install
+# make uninstall
+.fi
+.RE
+.SH ENVIRONMENT
+.TP
+.B DIARY_DIR
+Root directory for the journal and
+.IR diary.conf .
+Should be set globally (e.g.\& in
+.IR .profile ,
+.IR .zshrc ).
+Defaults to
+.IR ~/diary .
+.TP
+.B EDITOR
+Editor used to open the entry.
+Can be set in
+.I diary.conf
+to override your global
+.BR EDITOR .
+.TP
+.B ENTRY_PATH
+Path of the entry relative to
+.BR DIARY_DIR .
+Defaults to
+.IR "$(date\ \(aq+%Y/%m/%d\(aq).md" ,
+producing paths like
+.IR 2026/04/27.md .
+.TP
+.B PREFILL
+Text prepended to new entries.
+Defaults to the current date and time
+(e.g.\&
+.IR "#\ Monday\ 27\ April,\ 2026\ 11:37\ AM" ).
+.TP
+.B PREFILL_EDIT
+Text appended to existing entries (i.e.\& when using diary again in the same day).
+Empty by default.
+.TP
+.B USE_EDITOR
+Whether to open
+.B EDITOR
+after creating the entry.
+Defaults to
+.B true
+if
+.B EDITOR
+is set.
+.TP
+.B HOOK
+A command to run after editing is finished.
+Disabled by default.
+.SH FILES
+.TP
+.I $DIARY_DIR/diary.conf
+Configuration file created in
+.BR DIARY_DIR ;
+edit it to override the default configuration.
+Variables set here override the defaults described above.
+.SH EXIT STATUS
+.TP
+.B 0
+Success.
+.TP
+.B 1
+Fatal error (e.g.\&
+.B DIARY_DIR
+does not exist).
+.SH EXAMPLES
+Create a new entry and start editing:
+.PP
+.RS
+.nf
+$ diary
+[INFO] Created new entry ~/diary/2026/04/27.md
+.fi
+.RE
+.PP
+Use a custom journal directory:
+.PP
+.RS
+.nf
+$ DIARY_DIR="~/private_files/diary" diary
+[INFO] Created new entry ~/private_files/diary/2026/04/27.md
+.fi
+.RE
+.SH COPYRIGHT
+Copyright (c) 2026 W. Turner Abney, Licensed BSD-2-Clause.
+See https://github.com/cowtoolz/diary for details.
